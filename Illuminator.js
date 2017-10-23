@@ -1,17 +1,19 @@
-﻿function Illuminator (name, lightState) {
+﻿"use strict";
+
+function Illuminator (name) {
    this._name = name;
-   this._lightState = lightState;
+   this._lightState = new Switch();
+   this._lightState1 = new Switch();
 }
 
-Illuminator.prototype.lightState = function (lightState) {
-   if (lightState === 1 || lightState === 0) {
-      this._lightState = lightState;
-   } else {
-      return this._lightState;
-   }
+Illuminator.prototype.lightState = function(lightState) {
+   return this._lightState.powerState(lightState);
+};
+
+Illuminator.prototype.lightState1 = function(lightState) {
+   return this._lightState1.powerState(lightState);
 };
 
 Illuminator.prototype.toString = function () {
-      return "Объект -Illuminator- с именем: " + this._name + "   // Положенние выключателя:  " + this._lightState;
-
+      return "Лампа с именем: " + this._name + " [Явкий свет]:  " + this.lightState() + " [Мягкий свет]: " + this.lightState1()  + "</p>";
 };

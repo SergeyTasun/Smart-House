@@ -1,6 +1,6 @@
-﻿function Drawing () {
+﻿"use strict";
 
-}
+function Drawing () {}
 
 Drawing.prototype.draw = function (obj) {
    var wrappedD = document.getElementById("divWork");
@@ -9,31 +9,65 @@ Drawing.prototype.draw = function (obj) {
    for (var name in obj) {
       var obj = listObj[name];
       
-      if (obj instanceof Illuminator){   //// Узнаем тип объекта чтобы для него нарисовать отображение
-
-         idLightState = "Illuminator_" + obj._name; 
-                     
-         id_B_ON = "Illuminator_" + obj._name +"_ON";
-         id_B_OFF = "Illuminator_" + obj._name +"_OFF";  
-         
+      if (obj instanceof Illuminator){
+          
          var elem = document.createElement("div");
-         
-         var Top =  obj.toString() + '<b><p id = "'+ idLightState +'"></b>' + obj._lightState + '</p>' ;
-         var B_ON =  '<input type = "submint" id = "' + id_B_ON + '" value = "Включить"> ';
-         var B_OFF = '<input type = "submint" id = "' + id_B_OFF + '" value = "Выключить">';
-         elem.innerHTML = Top + B_ON + B_OFF;
+         elem.innerHTML = obj.toString();
          wrappedD.appendChild(elem);
          
-         document.getElementById(id_B_ON).onclick = on.bind(obj);
-         document.getElementById(id_B_OFF).onclick = off.bind(obj);
-         
+         var inputOn = document.createElement("input"); inputOn.type = "button"; inputOn.value = "Яркий свет"; inputOn.onclick = on.bind(obj); elem.appendChild(inputOn);
          function on () {
            this.lightState(1);
             drawing.draw(listObj);
          }
+   
+         var inputOn = document.createElement("input"); inputOn.type = "button"; inputOn.value = "Мягкий свет"; inputOn.onclick = on1.bind(obj); elem.appendChild(inputOn);
+         function on1 () {
+           this.lightState1(1);
+            drawing.draw(listObj);
+         }
          
-         function off () {
-           this.lightState(0);
+         var inputOff = document.createElement("input"); inputOff.type = "button"; inputOff.value = "Удалить"; inputOff.onclick = deleteObj.bind(obj); elem.appendChild(inputOff);
+         function deleteObj () {
+           delete listObj[this._name];
+            drawing.draw(listObj);
+         }
+      }
+      
+      if (obj instanceof Heater){
+         
+      var elem = document.createElement("div");
+         elem.innerHTML = obj.toString();
+         wrappedD.appendChild(elem);
+         
+         var inputOn = document.createElement("input"); inputOn.type = "button"; inputOn.value = "Режимы обогревателя"; inputOn.onclick = mode.bind(obj); elem.appendChild(inputOn);
+         function mode () {
+           this.powerMod(1);
+            drawing.draw(listObj);
+         }
+         
+         var inputOff = document.createElement("input"); inputOff.type = "button"; inputOff.value = "Удалить"; inputOff.onclick = deleteObj.bind(obj); elem.appendChild(inputOff);
+         function deleteObj () {
+           delete listObj[this._name];
+            drawing.draw(listObj);
+         }
+      }
+
+      if (obj instanceof Сalorifier){
+         
+      var elem = document.createElement("div");
+         elem.innerHTML = obj.toString();
+         wrappedD.appendChild(elem);
+         
+         var inputOn = document.createElement("input"); inputOn.type = "button"; inputOn.value = "Режим вентилятора"; inputOn.onclick = mode2.bind(obj); elem.appendChild(inputOn);
+         function mode2 () {
+           this.fanState(1);
+            drawing.draw(listObj);
+         }
+ 
+         var inputOff = document.createElement("input"); inputOff.type = "button"; inputOff.value = "Удалить"; inputOff.onclick = deleteObj.bind(obj); elem.appendChild(inputOff);
+         function deleteObj () {
+           delete listObj[this._name];
             drawing.draw(listObj);
          }
       }
