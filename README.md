@@ -34,7 +34,7 @@ Smart House
 каналов, настройки телевизора и т.д.
 
 
-index: 
+index: </p>
   html  с базовой разметкой
 
 script: 
