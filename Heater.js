@@ -10,5 +10,5 @@ Heater.prototype.powerMod = function(powerMod) {
 };
 
 Heater.prototype.toString = function () {
-      return "Обогреватель с именем: " + this._name + " [Режим работы]:  " + this.powerMod() + "</p>";
+      return "</p>Обогреватель с именем: [ " + this._name + " ]. Режим работы:  { " + this.powerMod() + " }</p>";
 };

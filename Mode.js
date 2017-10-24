@@ -15,4 +15,3 @@ Mode.prototype.modeState = function (modeState) {
       return this._powerMod;
    }
 }
-
